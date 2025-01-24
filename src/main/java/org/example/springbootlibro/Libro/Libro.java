@@ -1,4 +1,4 @@
-package org.example.springbootlibro;
+package org.example.springbootlibro.Libro;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

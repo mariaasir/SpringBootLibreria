@@ -1,4 +1,4 @@
-package org.example.springbootlibro;
+package org.example.springbootlibro.Libro;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class LibroController {
     }
 
     //GET --> SELECT *
-    @GetMapping
+    @GetMapping("/getLibros")
     public ResponseEntity<List<Libro>> getLibro() {
         List<Libro> lista = this.repositorioLibros.findAll();
         System.out.println(lista);
