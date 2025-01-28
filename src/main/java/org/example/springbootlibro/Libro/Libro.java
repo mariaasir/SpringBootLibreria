@@ -4,66 +4,33 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "libro")
 public class Libro {
     @Id
     @Size(max = 20)
     @Column(name = "isbn", nullable = false, length = 20)
+    @NotBlank(message = "El  campo ISBN no puede estar vacío")
+    @Pattern(regexp = "[A-Z]{4}", message = "ISBN tiene que tener 4 mayúsculas")
     private String isbn;
 
-    @Size(max = 200)
-    @NotNull
+    @Size(max = 200, message = "La longitud máxima del título debe ser de 200 caracteres")
+    @NotNull(message = "No puede estar vacío")
+    @Pattern(regexp = "^[A-Z].*" , message = "La primera letra debe estar  en mayúsculas")
     @Column(name = "titulo", nullable = false, length = 200)
     private String titulo;
 
-    @Size(max = 100)
-    @NotNull
+    @Size(max = 100, message = "La longitud máxima del autor debe ser de 100 caracteres")
+    @NotNull(message = "No puede estar vacío")
+    @Pattern(regexp = "^[A-Z].*" , message = "La primera letra debe estar  en mayúsculas")
     @Column(name = "autor", nullable = false, length = 100)
     private String autor;
 
-    public Libro(String isbn, String titulo, String autor) {
-        this.isbn = isbn;
-        this.titulo = titulo;
-        this.autor = autor;
-    }
-
-    public Libro() {
-    }
-
-    public @Size(max = 20) String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(@Size(max = 20) String isbn) {
-        this.isbn = isbn;
-    }
-
-    public @Size(max = 200) @NotNull String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(@Size(max = 200) @NotNull String titulo) {
-        this.titulo = titulo;
-    }
-
-    public @Size(max = 100) @NotNull String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(@Size(max = 100) @NotNull String autor) {
-        this.autor = autor;
-    }
-
-    @Override
-    public String toString() {
-        return "Libro{" +
-                "isbn='" + isbn + '\'' +
-                ", titulo='" + titulo + '\'' +
-                ", autor='" + autor + '\'' +
-                '}';
-    }
 }
