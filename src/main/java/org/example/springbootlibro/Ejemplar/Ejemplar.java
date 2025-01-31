@@ -2,7 +2,9 @@ package org.example.springbootlibro.Ejemplar;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +31,8 @@ public class Ejemplar {
 
     @ColumnDefault("'Disponible'")
     @Lob
+    @NotBlank(message = "El campo estado no puede estar vacío")
+    @Pattern(regexp = "^(Disponible|Prestado|Dañado)$", message = "El estado debe ser uno de los siguientes valores: disponible, prestado, dañado")
     @Column(name = "estado")
     private String estado;
 
